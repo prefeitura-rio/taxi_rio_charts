@@ -1,0 +1,6 @@
+apiVersion: v2
+name: prefect-agent
+description: Deploys Prefect agents for Taxi Rio
+type: application
+version: 1.0.2
+appVersion: 1.4.1

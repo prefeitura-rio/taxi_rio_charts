@@ -19,18 +19,11 @@ infisical init
 Install [Helm](https://helm.sh/docs/intro/install/) and then install the agent:
 
 ```sh
-infisical run --env=dev --path=/taxi-rio \
-    -- helm install prefect-agent . -f values.yaml \
-    --namespace prefect \
-    --set secrets.ghcr.dockerConfigJson=$DOCKER_CONFIG_JSON \
-    --set secrets.prefect.authToml=$AUTH_TOML \
-    --set secrets.infisical.address=$INFISICAL_ADDRESS \
-    --set secrets.infisical.token=$INFISICAL_TOKEN \
-    --dry-run
+make infisical-install
 ```
 
 To delete the agent, run:
 
 ```sh
-helm delete --namespace prefect prefect-agent
+make delete
 ```

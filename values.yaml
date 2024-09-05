@@ -1,0 +1,47 @@
+agent:
+  name: prefect-agent
+  component: agent
+  imageName: prefecthq/prefect
+  type: kubernetes
+  serviceAccountName: prefect-agent
+  apolloUrl: https://api.pipelines.dados.rio/proxy/
+  prefectAuthSecretName: prefect-auth-toml
+  infisicalAuthSecretName: infisical-credentials
+  jobTemplateFilePath: https://storage.googleapis.com/datario-public/job_template_no_node_affinity.yaml
+  prefectBackendServer: false
+  prefectLabels: [taxirio]
+  env: []
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+
+job:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+secrets:
+  ghcr:
+    name: ghcr-secret
+    dockerConfigJson:
+  prefect:
+    name: prefect-auth-toml
+    authToml:
+  infisical:
+    name: infisical-credentials
+    address:
+    token:
